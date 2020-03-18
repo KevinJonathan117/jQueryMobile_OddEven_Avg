@@ -15,8 +15,17 @@
         <article data-role="content">
             <div data-role="fieldcontain">
                 <label>Range:</label>
-                <input type="text" id="name" value=""><br>
-                <input type="button" value="OK">
+                <input type="text" id="sesuatu" value=""><br>
+                <input type="text" id="sesuatu1" value=""><br>
+
+                <a href="#popupBasic" data-rel="popup"><input type="button" value="Ganjil" onclick="tampil()"></a>
+                <a href="#popupBasic" data-rel="popup"><input type="button" value="Genap" onclick="tampil1()"></a>
+                <div data-role="popup" id="popupBasic">
+                    <p id="ganjil"></p>
+                </div>
+                <div data-role="popup" id="popupBasic1">
+                    <p id="genap"></p>
+                </div>
             </div>
             <a href="#win2">Go to Window 2</a>
         </article>
@@ -26,10 +35,18 @@
     </section>
     <section data-role="page" id="win2">
         <header data-role="header">
-            <h1>Some Title</h1>
+            <h1>Halaman 2</h1>
         </header>
         <article data-role="content">
-            <h1>The Contents</h1>
+            <div data-role="fieldcontain">
+                <label>Angka:</label>
+                <input type="text" id="angka" value=""><br>
+                <input type="button" value="Input" onclick="addData()"><br>
+                <a href="#popupAverage" data-rel="popup"><input type="button" value="Hitung" onclick="hitungData()"></a>
+                <div data-role="popup" id="popupAverage">
+                    <p id="hasilAverage"></p>
+                </div>
+            </div>
             <a href="#win1">Go to Window 1</a>
         </article>
         <footer data-role="footer">
@@ -38,7 +55,50 @@
     </section>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
+    <script>
+        var totalAngka = 0;
+        var jumlahData = 0;
+        var array = [];
+        function tampil() {
+            //ganjil
+            var angkaMinimum = parseInt(document.getElementById("sesuatu").value);
+            var angkaMaksimum = parseInt(document.getElementById("sesuatu1").value);
+            if (angkaMinimum % 2 == 0) {
+                angkaMinimum += 1;
+            }
+            var counter = 0;
+            while (angkaMinimum <= angkaMaksimum) {
+                array[counter] = angkaMinimum;
+                angkaMinimum += 2;
+                counter++;
+            }
+            document.getElementById("ganjil").innerHTML = array;
+        }
+        function tampil1() {
+            //ganjil
+            var angkaMinimum = parseInt(document.getElementById("sesuatu").value);
+            var angkaMaksimum = parseInt(document.getElementById("sesuatu1").value);
+            if (angkaMinimum % 2 != 0) {
+                angkaMinimum += 1;
+            }
+            var counter = 0;
+            while (angkaMinimum <= angkaMaksimum) {
+                array[counter] = angkaMinimum;
+                angkaMinimum += 2;
+                counter++;
+            }
+            document.getElementById("ganjil").innerHTML = array;
+        }
+        function addData() {
+            var currentAngka = parseInt(document.getElementById("angka").value);
+            totalAngka += currentAngka;
+            jumlahData++;
+            document.getElementById("angka").value = "";
+        }
+        function hitungData() {
+            document.getElementById("hasilAverage").innerHTML = totalAngka / jumlahData;
+        }
+    </script>
 </body>
 
 </html>
